@@ -236,4 +236,5 @@ let newName = name.replaceAll('w', 'W')
 - Não modifique a string da const "name";
 - Exiba a "newName" no console;
 */
-console.log(`My name is ${newName}`)
+newName =`${name[0].toUpperCase()}${name.slice(1,6)} ${name[7].toUpperCase()}${name.slice(8)}`
+console.log(newName)
