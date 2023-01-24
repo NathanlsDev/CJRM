@@ -108,7 +108,7 @@ apenas as letras iniciais dos nomes do array "dogNames";
 - Exiba a "initials" no console.
 */
 dogNames.push('Nina')
-const initals = `${dogNames[0].slice(0,1)}${dogNames[1].slice(0,1)}${dogNames[2].slice(0,1)}${dogNames[3].slice(0,1)}`
+const initals = `${dogNames[0][0]}${dogNames[1][0]}${dogNames[2][0]}${dogNames[3][0]}`
 // console.log(initals)
 
 
@@ -136,9 +136,9 @@ constante que você criou.
 
 ''
 */
-const dessert = `${dogNames[0].slice(3, 5)}${dogNames[1].slice(2, 4)}${dogNames[3].slice(2, 4)}`.replace('n', 'd')
+const dessert = `${dogNames[0].slice(3)}${dogNames[1].slice(2)}${dogNames[3].slice(2)}`.replace('n', 'd')
 
-// console.log(`A ${dessert} é um doce à base de coco, tradicional na América Latina e em Angola.`)
+console.log(`A ${dessert} é um doce à base de coco, tradicional na América Latina e em Angola.`)
 
 /*
 12 - Comente o console.log acima e:
