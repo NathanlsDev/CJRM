@@ -74,10 +74,8 @@ const typeSentence = `O tipo de dado que a const "isRandomTVShowIncluded" armaze
   caracteres? BOOLEAN."
 */
 
-const conversionBoolean = typeSentence.length > 39
-const newConversion = String(conversionBoolean).replace('t', 'T')
-
-// console.log(`A string que a "typeSentence" armazena tem mais de 39 caracteres? ${newConversion}.`)
+const numberCheck = 39
+// console.log(`A string que a "typeSentence" armazena tem mais de 39 caracteres? ${String(typeSentence.length > numberCheck).replace('t', 'T')}.`)
 
 
 /*
@@ -137,11 +135,9 @@ const ageSum = ages[0] + ages[2]
   - Exiba a "isNotAString" no console.
 */
 
-const vefifyType = typeof randomTVShow
-const isNotAString = vefifyType != 'string'
+const isNotAString = typeof randomTVShow !== 'string'
 
 // console.log(isNotAString)
-
 
 /*
   10 - Comente o console.log() acima e:
@@ -153,4 +149,4 @@ const isNotAString = vefifyType != 'string'
 
 const evenNumbers = [0, 2, 4, 6, 8, 10]
 
-console.log(evenNumbers[4] === 8)
+console.log(evenNumbers.indexOf(8) !== -1)
