@@ -22,7 +22,7 @@
 */
 // let i = 0
 
-// while (i < 6){
+// while (i <= 5){
 //   console.log(i)
 //   i++
 // }
@@ -34,7 +34,7 @@
   - Utilizando um for loop, faça o mesmo que foi pedido no exercício 01.
 */
 
-// for (i = 0; i < 6; i++){
+// for (i = 0; i <= 5; i++){
 //   console.log(i)
 // }
 
@@ -85,9 +85,14 @@ for (city = 0; city < cities.length; city++){
 */
 
 const names = ['João Grilo', 'Chicó', 'Rosinha']
+let HTMLTemplate = ''
+
 for (name = 0; name < names.length; name++){
-  // console.log(`<li>${names[name]}</li>`)
+  HTMLTemplate += `<li>${names[name]}</li>`
 }
+
+// console.log(HTMLTemplate)
+
 
 /*
   06 - Comente o console.log acima e:
@@ -105,7 +110,6 @@ for (let i = 0; i < numbers.length; i++){
   sum += Number(numbers[i])
 }
 // console.log(sum === 337)
-
 
 
 /*
