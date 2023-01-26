@@ -139,9 +139,9 @@ const arrays = [
 
 let total = 0
 
-for (let i = 0; i < arrays.length; i++){
-  for (let j = 0; j < arrays[i].length; j++){
-    total += arrays[i][j]
+for (let linha = 0; linha < arrays.length; linha++){
+  for (let coluna = 0; coluna < arrays[linha].length; coluna++){
+    total += arrays[linha][coluna]
 
   }
 }
