@@ -18,16 +18,13 @@ console.log(!true, !false)
 
 const animals = ['macaco', 'tucano', 'elefante', 'pavão', 'hipopótamo']
 
-for (let i = 0; i < animals.length; i++){
-  if (animals.includes('leão')){
-    console.log('Existe um leão no array animals.')
-    break
+if (!animals.includes('leão')){
+  console.log('Leão não existe no array animals.')  
 
-  } else {
-    console.log('Leão não existe no array animals.')
-    break
-  }
+} else {
+  console.log('Existe um leão no array animals.')
 }
+
 
 /*
   03
@@ -45,9 +42,10 @@ soma = 0
 
 for (let i = 0; i < randomNumbers.length; i++){
   soma += randomNumbers[i]
+  const target = 400
 
-  if (soma >= 400){
-    console.log(`A soma ultrapassou 400. Até aqui, o valor atual é ${soma}`)
+  if (soma > target){
+    console.log(`A soma ultrapassou ${target}. Até aqui, o valor atual é ${soma}`)
     break
   }
 }
@@ -94,31 +92,34 @@ const strings = []
 let loops = null
 
 for (let i = 0; i < randomValues.length; i++){
-  const elementType = randomValues[i]
-  const typeIsBoolean = typeof elementType === 'boolean'
-  const typeIsString = typeof elementType === 'string'
+  const element = randomValues[i]
+  const typeIsBoolean = typeof element === 'boolean'
+  const typeIsString = typeof element === 'string'
   const limit = 4
 
   if (typeIsBoolean){
     booleans++
   }  
   if (typeIsString){
-    strings.push(elementType)
+    strings.push(element)
     
     if (strings.length === limit){
       break
     }
   }
-  loops = i
+
+  loops++
 }
 
-const joinStrings = strings.join(', ')
+const lastItem = strings.at(-1)
+const fourStrings = strings.join(', ').replace(`, ${lastItem}`, ` e ${lastItem}`)
 
 console.log(`
-3 informações sobre o array randomValues:
-            - As primeiras 4 strings são ${joinStrings.slice(0,14)} e${joinStrings.slice(14)};
-            - Até que as primeiras 4 strings fossem iteradas, ${booleans} booleans foram iterados;
-            - O array foi iterado por ${loops} vezes.
+    3 informações sobre o array randomValues:
+    - As primeiras 4 strings são ${fourStrings};
+    - Até que as primeiras 4 strings fossem iteradas, 
+    ${booleans} booleans foram iterados;
+    - O array foi iterado por ${loops} vezes.
 `)
 
 
@@ -169,17 +170,18 @@ console.log(drink)
     para testar o switch que você escreveu.
 */
 
-const a = 7
+const number = 7
+const numberMessage = 'O valor de "number" é'
 
-switch (a){
+switch (number){
   case 0:
-    console.log(`O valor de "a" é ${a}`)
+    console.log(`${numberMessage} ${number}`)
     break
   case 1:
-    console.log(`O valor de "a" é ${a}`)
+    console.log(`${numberMessage} ${number}`)
     break
   default:
-    console.log(`O valor de "a" é qualquer número, exceto 0 e 1`)
+    console.log(`${numberMessage} qualquer número, exceto 0 e 1`)
 }
 
 // if (a === 0) {
