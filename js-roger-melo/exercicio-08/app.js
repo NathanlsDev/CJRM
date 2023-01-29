@@ -40,15 +40,15 @@ console.log(division(14, 4))
   "Esta é a Xª vez que essa string é exibida."
 */
 
-function showParam (param = 'Essa fera meo'){
+const log = function (param = 'Essa fera meo'){
   console.log(param)
-  for (let i = 1; i <= 7; i++){
-    // console.log(`Esta é a ${i}° vez que essa string é exibida.`)
-
-  }
 }
+// for (let i = 1; i <= 7; i++){
+//   log(`Esta é a ${i}° vez que essa string é exibida.`)
 
-showParam('oloco bicho!')
+// }
+
+log('oloco bicho!')
 
 /*
   04
@@ -176,7 +176,8 @@ function decipher (array){
   let sentence = ''
 
   for (item in array){
-    sentence += `${array[item]()} `
+    const string = `${array[item]()} `    
+    sentence += string
   }
 
   return sentence
