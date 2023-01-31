@@ -93,7 +93,7 @@ console.log(mergedArray)
 */
 
 const removeLastItem = array => {
-  const lastIndexRemover = array.pop()
+  array.pop()
   return array
 }
 const lastRemoved = removeLastItem(['sapato', 'cadeira', 'vassoura', 'cachorro'])
@@ -105,14 +105,8 @@ console.log(lastRemoved)
   - Crie uma função que retorna se o valor passado como argumento em sua invocação é null.
 */
 
-const isNull = param => {
-  if (param === null){
-    return true
-  }
-
-  return false
-}
-const typeOfArgument = isNull(null)
+const isNull = param => param === null
+const typeOfArgument = isNull('batata')
 console.log(typeOfArgument)
 
 
@@ -156,8 +150,8 @@ console.log(summonCallback(33, multiBy3))
 */
 
 const numbers = [22, 45, 35]
-numbers.forEach((element, index, array) => {
-  console.log(`O ${index + 1}º item do array [${array}] é ${element}`)
+numbers.forEach((element, index, array) => {  
+  console.log(`O ${index + 1}º item do array [${array.join(', ')}] é ${element}`)
 })
 
 /*
