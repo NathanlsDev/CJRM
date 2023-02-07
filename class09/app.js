@@ -4,20 +4,31 @@ let user = {
   age: '31',
   mail: 'example@email.com',
   city: 'São Paulo',
-  blogPosts: ['Empadão de frango', '4 receitas com javascript e maisena']
+  blogPosts: ['Empadão de frango', '4 receitas com javascript e maisena'],
+  login: function () {
+    console.log('usuário logado')
+  },
+  logout: () => {
+    console.log('usuário deslogado')
+  }
 }
 
-console.log(user.blogPosts[1])
+user.login()
+user.logout()
 
-user.age = 28
+// console.log(user.blogPosts[1])
 
-console.log(user.age)
+// user.age = 28
 
-const key = 'mail'
-console.log(user[key])
+// console.log(user.age)
 
-user['name'] = 'José'
+// const key = 'mail'
+// console.log(user[key])
 
-console.log(user.name)
+// user['name'] = 'José'
 
-console.log(typeof user)
+// console.log(user.name)
+
+// console.log(typeof user)
+
+//methods
