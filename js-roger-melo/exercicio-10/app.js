@@ -10,20 +10,34 @@
   - Exiba o objeto no console.
 */
 
+const cat = {
+  name: 'Felix',
+  age: 1,
+  color: 'cinza',
+  bestFriends: ['Rex', 'Tobias', 'Siff'],
+  sound: () => {
+    return 'https://youtu.be/FXWzwO5b6E0'
+    } 
+}
+console.log(cat)
+
 /*
   02
 
-  - Exiba a mensagem abaixo no console, substituindo os "X" pelas informações  
-    corretas.
+  - Exiba a mensagem abaixo no console, substituindo os "X" pelas informações corretas.
 
   Até aqui, o objeto "cat" possui as seguintes propriedades e valores: "name", que recebeu "X", "age", que recebeu "X", "color", que recebeu "X", "bestFriends", que recebeu um array com os itens "X" e "X", e "sound", que recebeu uma função que retorna "X".
 */
+console.log(`Até aqui, o objeto "cat" possui as seguintes propriedades e valores: "name", que recebeu "${cat.name}", "age", que recebeu "${cat.age}", "color", que recebeu "${cat.color}", "bestFriends", que recebeu um array com os itens "${cat.bestFriends[0]}" e "${cat.bestFriends[1]}", e "sound", que recebeu uma função que retorna "${cat.sound()}".`)
+
 
 /*
   03
 
   - Adicione 2 anos à idade do gato e exiba a idade atualizada no console.
 */
+cat.age += 2
+console.log(cat.age)
 
 /*
   04
@@ -33,22 +47,39 @@
     adicionado.
 */
 
+const moreFriends = friend => cat.bestFriends.push(friend)
+moreFriends('Betina')
+console.log(cat.bestFriends)
+
 /*
   05
 
   - Crie uma função que adiciona mais uma cor à cor do gato;
   - Utilize a sintaxe de colchetes para fazer isso;
-  - Exiba a nova cor do gato no console, também utilizando a sintaxe de  
-    colchetes.
+  - Exiba a nova cor do gato no console, também utilizando a sintaxe de colchetes.
 */
+const newColor = 'laranja'
+
+const changeColor = color => cat['color'] = color
+changeColor(newColor)
+
+console.log(cat.color)
 
 /*
   06
 
-  - Crie uma função que retorna um boolean indicando se um valor recebido por  
-    parâmetro é um objeto;
+  - Crie uma função que retorna um boolean indicando se um valor recebido por parâmetro é um objeto;
   - Utilize a função para exibir no console se "cat" é um objeto.
 */
+
+const isObject = value => {
+  if (typeof value === 'object'){
+    return true
+  }
+  return false
+}
+const output = isObject(cat)
+console.log(output)
 
 /*
   07
@@ -60,6 +91,24 @@
   "A soma das idades de NOME_DO_GATO e NOME_DO_CACHORRO é RESULTADO_DA_SOMA."
 */
 
+
+const dog = {
+  name: 'Rex',
+  age: 2,
+  color: 'Preto',
+  bestFriends: ['Felix', 'Tobias', 'Siff'],
+  sound: () => {
+    return 'https://youtu.be/qGu-7ZF5kXM'
+    } 
+}
+
+const petAges = (cat, dog) => {
+  const sumAges = cat.age + dog.age
+  return(`A soma das idades de ${cat.name} e ${dog.name} é ${sumAges}`)
+}
+console.log(petAges(cat, dog))
+
+
 /*
   08
 
@@ -69,15 +118,16 @@
 */
 
 const isAnSUV = car => {
-  if (car === 'Honda HR-V' || car === 'Jeep Renegade' || car === 'Ford EcoSport' || car === 'Hyundai iX35') {
+  const carIs4x4 = car === 'Honda HR-V' || car === 'Jeep Renegade' || car === 'Ford EcoSport' || car === 'Hyundai iX35'
+  
+  if (carIs4x4) {
     return true
   }
-
   return false
 }
 
-// console.log(isAnSUV('Honda Civic'))
-// console.log(isAnSUV('Ford EcoSport'))
+console.log(isAnSUV('Honda Civic'))
+console.log(isAnSUV('Ford EcoSport'))
 
 /*
   09
@@ -91,3 +141,13 @@ const isAnSUV = car => {
     propriedades, retorne a mensagem que a propriedade armazena;
   - Teste a função, exibindo no console a mensagem de cada propriedade.
 */
+
+const whichType = (type) => {
+  const messages = {
+    null: 'Seta, explicitamente, uma variável sem valor.',
+    undefined: 'Representa um valor não-setado.',
+    object: 'Arrays, Datas, Objetos literais, Funções, etc.',
+  }
+  return messages[type]
+}
+console.log(whichType('null'));
