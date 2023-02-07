@@ -47,8 +47,10 @@ console.log(cat.age)
     adicionado.
 */
 
-const moreFriends = friend => cat.bestFriends.push(friend)
-moreFriends('Betina')
+const moreFriends = (friend, object) => {
+  object.bestFriends.push(friend)
+}
+moreFriends('Betina', cat)
 console.log(cat.bestFriends)
 
 /*
@@ -58,9 +60,9 @@ console.log(cat.bestFriends)
   - Utilize a sintaxe de colchetes para fazer isso;
   - Exiba a nova cor do gato no console, também utilizando a sintaxe de colchetes.
 */
-const newColor = 'laranja'
+const newColor = ' e laranja'
 
-const changeColor = color => cat['color'] = color
+const changeColor = color => cat['color'] += color
 changeColor(newColor)
 
 console.log(cat.color)
@@ -72,12 +74,7 @@ console.log(cat.color)
   - Utilize a função para exibir no console se "cat" é um objeto.
 */
 
-const isObject = value => {
-  if (typeof value === 'object'){
-    return true
-  }
-  return false
-}
+const isObject = value => typeof value === 'object'
 const output = isObject(cat)
 console.log(output)
 
@@ -117,14 +114,12 @@ console.log(petAges(cat, dog))
   - Como você refatoraria esta função?
 */
 
-const isAnSUV = car => {
-  const carIs4x4 = car === 'Honda HR-V' || car === 'Jeep Renegade' || car === 'Ford EcoSport' || car === 'Hyundai iX35'
-  
-  if (carIs4x4) {
-    return true
-  }
-  return false
-}
+const isAnSUV = car => [
+  'Honda HR-V',
+  'Jeep Renegade',
+  'Ford EcoSport',
+  'Hyundai iX35'
+].includes(car)  
 
 console.log(isAnSUV('Honda Civic'))
 console.log(isAnSUV('Ford EcoSport'))
@@ -144,7 +139,7 @@ console.log(isAnSUV('Ford EcoSport'))
 
 const whichType = (type) => {
   const messages = {
-    null: 'Seta, explicitamente, uma variável sem valor.',
+    null: 'Seta explicitamente, uma variável sem valor.',
     undefined: 'Representa um valor não-setado.',
     object: 'Arrays, Datas, Objetos literais, Funções, etc.',
   }
