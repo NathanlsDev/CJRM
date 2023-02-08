@@ -56,7 +56,10 @@ const car = {
     return `The ${this.name} stopped`
   },
   getColorsMessage (){
-    return `O ${this.name} está disponível nas cores ${this.colors.join(', ')}`
+    const lastItem = this.colors[this.colors.length -1]
+    const colors = this.colors.join(', ').replace(lastItem, `and ${lastItem}`)
+
+    return `The ${this.name} is available in colors: ${colors}`
   }
 }
 
@@ -94,4 +97,4 @@ console.log(car.getColorsMessage())
   - Utilize a notação de colchetes para acessar as propriedades do carro.
 */
 
-console.log(`O carro é um ${car['brand']}`)
+console.log(`The ${car['name']} is a ${car['brand']}`)
