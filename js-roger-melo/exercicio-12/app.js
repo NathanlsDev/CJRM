@@ -30,7 +30,7 @@ const best2019Movies = [
 let moviesOmelete = `Segundo o site Omelete, os melhores filmes de 2019 são:\n`
 
 best2019Movies.forEach(movie => {
-  moviesOmelete += `- ${movie.title}, dirigido por ${movie.directedBy}.\n`
+  moviesOmelete += `  - ${movie.title}, dirigido por ${movie.directedBy}.\n`
 })
 
 console.log(moviesOmelete)
@@ -67,15 +67,29 @@ const youtubeUser = {
       gitHub: 'https://github.com/Roger-Melo'
     },
     country: 'Brasil'
+  },
+  logMessage (){
+    console.log(`Vídeos recentes de ${this.name}:`)
+    this.videos.recentVideos.forEach(video => {
+      console.log(video.title)
+    })
   }
 }
 
-let videosRecentes = `Vídeos recentes de Roger Melo:\n`
-youtubeUser.videos.recentVideos.forEach(video => {
-  videosRecentes += `${video.title}\n`
-})
+youtubeUser.logMessage()
 
-console.log(videosRecentes)
+/*
+let videosRecentes = `Vídeos recentes de Roger Melo:\n`
+
+const logMessage = () => {
+  youtubeUser.videos.recentVideos.forEach(video => {
+  videosRecentes += `${video.title}\n`
+  })
+
+  return console.log(videosRecentes)
+}
+
+logMessage()
 
 
 /*
