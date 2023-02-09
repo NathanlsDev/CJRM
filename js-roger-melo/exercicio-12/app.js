@@ -27,6 +27,14 @@ const best2019Movies = [
   { title: 'A Vida Invisível', directedBy: 'Karim Aïnouz' }
 ]
 
+let moviesOmelete = `Segundo o site Omelete, os melhores filmes de 2019 são:\n`
+
+best2019Movies.forEach(movie => {
+  moviesOmelete += `- ${movie.title}, dirigido por ${movie.directedBy}.\n`
+})
+
+console.log(moviesOmelete)
+
 /*
   02
 
@@ -62,12 +70,21 @@ const youtubeUser = {
   }
 }
 
+let videosRecentes = `Vídeos recentes de Roger Melo:\n`
+youtubeUser.videos.recentVideos.forEach(video => {
+  videosRecentes += `${video.title}\n`
+})
+
+console.log(videosRecentes)
+
+
 /*
   03
 
   - Exiba o valor do PI no console.
 */
 
+console.log(Number(Math.PI.toFixed(2)))
 
 
 /*
@@ -78,6 +95,7 @@ const youtubeUser = {
 */
 
 const firstNumber = 8.3
+console.log(Math.ceil(firstNumber))
 
 /*
   05
@@ -87,6 +105,8 @@ const firstNumber = 8.3
 */
 
 const secondNumber = 3.5
+console.log(Math.ceil(secondNumber))
+
 
 /*
   06
@@ -96,6 +116,7 @@ const secondNumber = 3.5
 */
 
 const thirdNumber = 8.9
+console.log(Math.floor(thirdNumber))
 
 /*
   07
@@ -104,6 +125,7 @@ const thirdNumber = 8.9
 */
 
 const fourthNumber = 5.5
+console.log(Math.trunc(fourthNumber))
 
 /*
   08
@@ -111,3 +133,4 @@ const fourthNumber = 5.5
   - A cada vez que o index.html for carregado, exiba no console um número  
     aleatório de 0 à 10, incluindo 0 e 10.
 */
+console.log(Math.round(Math.random() * 10))
