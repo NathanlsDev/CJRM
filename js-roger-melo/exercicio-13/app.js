@@ -15,7 +15,6 @@ const getCatInfo = () => {
   return { name, age, color }
 }
 const { name, age, color } = getCatInfo()
-
 console.log(`${name} é um gato ${color} de ${age} anos`)
 
 /*
