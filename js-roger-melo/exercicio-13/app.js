@@ -1,8 +1,7 @@
 /*
   01
 
-  - Adicione apenas uma linha de código dentro da função "getCatInfo" para fazer  
-    com que as informações do gato estejam disponíveis fora da função;
+  - Adicione apenas uma linha de código dentro da função "getCatInfo" para fazer com que as informações do gato estejam disponíveis fora da função;
   - Abaixo da função "getCatInfo", exiba no console a seguinte mensagem:
 
   "NOME_DO_GATO é um gato COR_DO_GATO de IDADE_DO_GATO anos."
@@ -12,14 +11,17 @@ const getCatInfo = () => {
   const name = 'Marcos'
   let age = 3
   const color = 'Cinza'
+    
+  return { name, age, color }
 }
+const { name, age, color } = getCatInfo()
+
+console.log(`${name} é um gato ${color} de ${age} anos`)
 
 /*
   02
 
-  - Adicione apenas duas linhas de código dentro da função "external" para  
-    exibir no console a string que a const movie armazena, com todas as letras  
-    maiúsculas.
+  - Adicione apenas duas linhas de código dentro da função "external" para exibir no console a string que a const movie armazena, com todas as letras maiúsculas.
 */
 
 const external = () => {
@@ -29,7 +31,9 @@ const external = () => {
     const extraInternal = () => {
       console.log(movie.toUpperCase())
     }
+    extraInternal()
   }
+  internal()
 }
 
 external()
@@ -44,6 +48,7 @@ external()
 */
 
 let randomNumbers = [3, 2, 1]
+console.log(randomNumbers.reverse())
 
 /*
   04
@@ -59,11 +64,13 @@ let crazyArray = [
   [ 5, 96, 53  ]
 ]
 
+console.log(crazyArray.shift())
+
+
 /*
   05
 
-  - Encontre no array abaixo o cão com o nome "Zequinha" e exiba esse objeto  
-    no console;
+  - Encontre no array abaixo o cão com o nome "Zequinha" e exiba esse objeto no console;
 
   Dica: procure pelo método find, no MDN.
 */
@@ -76,12 +83,17 @@ const dogs = [
   { name: 'Xica', age: 6, gender: 'Female', breed: 'Chihuahua' }
 ]
 
+function findNames (dog){
+  return dog.name === "Zequinha"
+}
+console.log(dogs.find(findNames))
+
+
 /*
   06
 
   - Cole o markup HTML abaixo em seu index.html;
-  - Utilize o query selector para obter a referência do título principal da  
-    página, através da classe dele;
+  - Utilize o query selector para obter a referência do título principal da página, através da classe dele;
   - Exiba a referência do título principal no console.
 
   <section>
@@ -108,6 +120,9 @@ const dogs = [
   </section>
 */
 
+const title = document.querySelector('.main-title')
+console.log(title)
+
 /*
   07
 
@@ -115,3 +130,6 @@ const dogs = [
     página, através da classe deles;
   - Exiba esse NodeList no console.
 */
+
+const allTitles = document.querySelectorAll('h2')
+console.log(allTitles)
