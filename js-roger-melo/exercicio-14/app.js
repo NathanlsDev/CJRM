@@ -32,25 +32,29 @@ numbers.forEach(numberInUl)
 */
 
 const allLi = document.querySelectorAll('li')
-allLi.forEach(li => {
+
+const changeLiColor = li => {
   const numberLi = Number(li.textContent)
   const numberIsEven = numberLi % 2 === 0
-
+  
   if (numberIsEven){
     return li.style.color = 'green';
   }
-  return li.style.color = 'red';
-})
+  li.style.color = 'red';
+}
+
+allLi.forEach(changeLiColor)
 
 /*
-  04
+04
 
   - Adicione a classe "body-background" no corpo do index.html;
 
   P.s: a classe "body-background" já está declarada no style.css.
 */
 
-const body = document.querySelector('body')
+//const body = document.querySelector('body')
+const body = document.body
 body.classList.add('body-background')
 
 /*
@@ -79,9 +83,7 @@ console.log(link.getAttribute('href'))
     manipuladas via JS no h1.
 */
 
-const h1 = document.querySelectorAll('h1')
-console.log(h1)
-
+console.log(title.style)
 
 /*
   08
@@ -90,7 +92,6 @@ console.log(h1)
 */
 
 body.classList.remove('body-background')
-
 
 
 /*
