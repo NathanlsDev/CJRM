@@ -82,10 +82,8 @@ const dogs = [
   { name: 'Xica', age: 6, gender: 'Female', breed: 'Chihuahua' }
 ]
 
-function findNames (dog){
-  return dog.name === "Zequinha"
-}
-console.log(dogs.find(findNames))
+const findNames = dogs.find(dog => dog.name === "Zequinha")
+console.log(findNames)
 
 
 /*
