@@ -1,14 +1,14 @@
 const ul = document.querySelector('ul')
 
-//ul.remove()
-
 const lis = document.querySelectorAll('li')
 lis.forEach(li => {
   li.addEventListener('click', event => {
     const clickedElement = event.target
+    console.log('Li clicked')
+    event.stopPropagation()
+    
     clickedElement.remove()
-
-    clickedElement.style.textDecoration = 'line-through'
+    //clickedElement.style.textDecoration = 'line-through'
   })
 })
 
@@ -19,4 +19,9 @@ button.addEventListener('click', () => {
   li.textContent = 'New Item'
   ul.prepend(li)
   console.log(li)  
+})
+
+ul.addEventListener('click', () => {
+  console.log('Ul clicked')
+
 })
