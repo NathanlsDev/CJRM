@@ -9,13 +9,16 @@ const div = document.querySelector('div')
 const elementsInsideDiv = Array.from(div.children)
 
 elementsInsideDiv.forEach(element => {
-  element.addEventListener('click', () => {
-    console.log('Clicou no filho da div.')
+  element.addEventListener('click', event => {
+    const lowerTag = event.target.tagName.toLowerCase()
+    event.stopPropagation()
+
+    h2.textContent = `Clicou no ${lowerTag}, filho da div`
   })
 })
 
 div.addEventListener('click', () => {
-  console.log('Clicou na div.')
+  h2.textContent = 'Clicou na div.'
 })
 
 /*
@@ -34,6 +37,8 @@ div.addEventListener('click', () => {
     filho da div, ao invés de ser exibida no console, seja inserida neste h2.
 */
 
+const h2 = document.querySelector('h2')
+
 /*
   04
 
@@ -41,13 +46,23 @@ div.addEventListener('click', () => {
     seja exibida no console.
 */
 
+h2.addEventListener('copy', event => {
+  console.log('Texto copiado')
+})
+
+
 /*
   05
 
   - Faça com que o movimento do mouse dentro da div com a classe "egg" substitua
     o texto que ela tem por 
-    "Eixo X: COORDENADA_EIXO_X | Eixo Y: COORDENADA_EIXO_Y".
+    "".
 */
+
+const eggMessage = document.querySelector('.egg')
+eggMessage.addEventListener('mousemove', event => {
+  eggMessage.textContent = `Eixo X: ${event.offsetX} | Eixo Y: ${event.offsetY}`
+})
 
 /*
   06
@@ -55,6 +70,11 @@ div.addEventListener('click', () => {
   - Modifique a cor do ovo para "lightgoldenrodyellow" quando o botão for 
     clicado.
 */
+
+const button = document.querySelector('button')
+button.addEventListener('click', () => {
+  eggMessage.style.background = 'lightgoldenrodyellow'
+})
 
 /*
   07
@@ -76,3 +96,9 @@ const people = [
   { id: 8, name: 'Matheus Manucci', profession: 'Piloto' },
   { id: 9, name: 'Hamilton Silva', profession: 'Advogado' }
 ]
+
+people.forEach(obj => {
+  if (obj.profession === 'Front-end developer'){
+    console.log(`O array people contém, no mínimo, um(a) ${obj.profession}.`)
+  }
+})
