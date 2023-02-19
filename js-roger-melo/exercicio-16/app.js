@@ -8,18 +8,26 @@
 const div = document.querySelector('div')
 const elementsInsideDiv = Array.from(div.children)
 
-elementsInsideDiv.forEach(element => {
-  element.addEventListener('click', event => {
-    const lowerTag = event.target.tagName.toLowerCase()
-    event.stopPropagation()
+// elementsInsideDiv.forEach(element => {
+//   element.addEventListener('click', event => {
+//     const lowerTag = event.target.tagName.toLowerCase()
+//     event.stopPropagation()
 
-    h2.textContent = `Clicou no ${lowerTag}, filho da div`
-  })
-})
+//     h2.textContent = `Clicou no ${lowerTag}, filho da div`
+//   })
+// })
 
-div.addEventListener('click', () => {
-  h2.textContent = 'Clicou na div.'
-})
+const showClickMessage = ({ target }) => {
+  const clickedElementName = target.tagName.toLowerCase()
+  if(clickedElementName === 'div'){
+    return h2.textContent = 'Clicou na div.'
+  }
+
+  h2.textContent = `Clicou no ${clickedElementName}, filho da div`
+
+}
+
+div.addEventListener('click', showClickMessage)
 
 /*
   02
@@ -46,9 +54,11 @@ const h2 = document.querySelector('h2')
     seja exibida no console.
 */
 
-h2.addEventListener('copy', event => {
+const copiedContent = () => {
   console.log('Texto copiado')
-})
+}
+
+h2.addEventListener('copy', copiedContent)
 
 
 /*
@@ -60,9 +70,11 @@ h2.addEventListener('copy', event => {
 */
 
 const eggMessage = document.querySelector('.egg')
-eggMessage.addEventListener('mousemove', event => {
-  eggMessage.textContent = `Eixo X: ${event.offsetX} | Eixo Y: ${event.offsetY}`
-})
+const mapMouseLocation = ({ offsetX, offsetY }) => {
+  eggMessage.textContent = `Eixo X: ${offsetX} | Eixo Y: ${offsetY}`
+}
+
+eggMessage.addEventListener('mousemove', mapMouseLocation)
 
 /*
   06
@@ -71,10 +83,12 @@ eggMessage.addEventListener('mousemove', event => {
     clicado.
 */
 
-const button = document.querySelector('button')
-button.addEventListener('click', () => {
+const changeEggColor = () => {
   eggMessage.style.background = 'lightgoldenrodyellow'
-})
+}
+
+const button = document.querySelector('button')
+button.addEventListener('click', changeEggColor)
 
 /*
   07
@@ -97,8 +111,9 @@ const people = [
   { id: 9, name: 'Hamilton Silva', profession: 'Advogado' }
 ]
 
-people.forEach(obj => {
-  if (obj.profession === 'Front-end developer'){
-    console.log(`O array people contém, no mínimo, um(a) ${obj.profession}.`)
-  }
-})
+const isSomePersonFrontendDeveloper = people.some(({ profession }) =>
+  profession === 'Front-end developer')
+
+if(isSomePersonFrontendDeveloper){
+  console.log(`O array people contém, no mínimo, um(a) Front-end developer.`)
+}
