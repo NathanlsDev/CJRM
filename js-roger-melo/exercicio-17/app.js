@@ -4,7 +4,22 @@
   - No envio do form, faça com que a página não seja recarregada.
 */
 
-/*
+const form = document.querySelector('form')
+const preventDefault = event => {
+  event.preventDefault()
+
+  const userInput = event.target.input.value
+  const regex = /^[a-zA-Z0-9]{6,11}$/
+  const result = console.log(regex.test(userInput))
+  if (result){
+    return console.log(`${userInput} aprovado, pois contém 6 ou mais caracteres válidos;`)
+  }
+  console.log(`${userInput} reprovado, pois contém menos de 6 caracteres válidos.`)
+}
+
+form.addEventListener('submit', preventDefault)
+
+/* 
   02
 
   - No envio do form obtenha, através do objeto event, o texto inserido no  
@@ -19,6 +34,9 @@
   - Exiba no console o boolean no qual este teste resulta.
 */
 
+const phrase = 'documentation'
+const regex = /^[a-z]{13}$/
+const result = console.log(regex.test(phrase))
 /*
   04
 
@@ -28,6 +46,8 @@
 */
 
 const B99message = 'E o Terry Crews faz tudo, inclusive tocar a abertura de B99 na flauta'
+const pattern = /[A-Z0-9]{3}/
+const validation = console.log(pattern.test(B99message))
 
 /*
   05
@@ -36,7 +56,7 @@ const B99message = 'E o Terry Crews faz tudo, inclusive tocar a abertura de B99 
     resultado do teste entre a regex e a string exibido no console seja true.
 */
 
-const word = 'O que a NASA fotografou no dia do seu aniversário?'
+const word = 'NASA'
 const NASARegex = /^[A-Z]{4}$/
 const NASAResult = NASARegex.test(word)
 
