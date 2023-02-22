@@ -5,16 +5,28 @@
 */
 
 const form = document.querySelector('form')
+
+const clearInput = () =>{
+  input.value =''
+  input.focus()
+}
+
+const logMessage = message => {
+  clearInput()
+  return console.log(message)
+}
+
 const preventDefault = event => {
   event.preventDefault()
 
-  const userInput = event.target.input.value
+  const input = event.target.input
   const regex = /^[a-zA-Z0-9]{6,11}$/
-  const result = console.log(regex.test(userInput))
+  const result = regex.test(input.value)
+
   if (result){
-    return console.log(`${userInput} aprovado, pois contém 6 ou mais caracteres válidos;`)
+    return logMessage(`Aprovado;`)
   }
-  console.log(`${userInput} reprovado, pois contém menos de 6 caracteres válidos.`)
+  logMessage(`reprovado;`)
 }
 
 form.addEventListener('submit', preventDefault)
@@ -34,9 +46,10 @@ form.addEventListener('submit', preventDefault)
   - Exiba no console o boolean no qual este teste resulta.
 */
 
-const phrase = 'documentation'
-const regex = /^[a-z]{13}$/
-const result = console.log(regex.test(phrase))
+const p = document.querySelector('p')
+const regex = /documentation/
+const result = console.log(regex.test(p.textContent))
+
 /*
   04
 
