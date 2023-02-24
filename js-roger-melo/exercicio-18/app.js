@@ -5,48 +5,58 @@
 
 /*
   01
-
   - Valide o valor do input "username" à medida em que ele é digitado;
   - Ele deve conter: 
     - No mínimo 6 caracteres;
     - Apenas letras maiúsculas e/ou minúsculas;
   - Se o valor inserido não é válido, exiba um parágrafo laranja abaixo do  
-    input com a seguinte mensagem: "O valor deve conter no mínimo 6 caracteres,  
-    com apenas letras maiúsculas e/ou minúsculas";
-  - Se o valor é válido, o parágrafo deve ser verde e exibir a mensagem  
+    input com a seguinte mensagem:
+    "O valor deve conter no mínimo 6 caracteres, com apenas letras maiúsculas e/ou minúsculas";
+  - Se o valor é válido, o parágrafo deve ser verde e exibir a mensagem: 
     "Username válido =)";
   - Use as classes disponíveis no arquivo style.css para colorir o parágrafo;
-  - Não insira o parágrafo manualmente no index.html.
-  
+  - Não insira o parágrafo manualmente no index.html.  
   Dica: pesquise pelo método "insertAdjacentElement", no MDN;
 */
 
-const form = document.querySelector('form')
+const inputInterface = document.querySelector('#username')
 const paragraph = document.createElement('p')
+let isValid = false
+const form = document.querySelector('form')
+const submitFeedBack = document.createElement('p')
 
-form.addEventListener('submit', event => {
-  event.preventDefault()
+inputInterface.addEventListener('keyup', ({ target }) => {
+  const userName = target.value
+  userValidation(userName)
+})
 
-  const userInput = event.target.username
+const userValidation = userName => {
+  const regexUserName = /^[a-zA-Z]{6,}(?: [a-zA-Z]+)*$/
+  const isAValidUserName = regexUserName.test(userName)
 
-  const userNameRegex = /^[a-zA-Z]{6,}$/
-  const isAValidUserName = userNameRegex.test(userInput.value)
-
-  if(isAValidUserName){    
-    paragraph.setAttribute('class', 'username-success-feedback')
-    paragraph.textContent = `Username válido =)` 
-    userInput.insertAdjacentElement('afterend', paragraph)    
-    return
+  if (!isAValidUserName){
+    logMessage('O valor deve conter no mínimo 6 caracteres, com apenas letras maiúsculas e/ou minúsculas')
+    invalidUserStyle()
+    userValidityCallBack(false)
+    return    
   }
+  logMessage ('Username válido =)')
+  validUserStyle()
+  userValidityCallBack(true)
+}
+
+const logMessage = message => {
+  paragraph.textContent = message
+  inputInterface.insertAdjacentElement('afterend', paragraph)
+}
+
+const invalidUserStyle = () => 
   paragraph.setAttribute('class', 'username-help-feedback')
-  paragraph.textContent = `O valor deve conter no mínimo 6 caracteres, com apenas letras maiúsculas e/ou minúsculas`
-  userInput.insertAdjacentElement('afterend', paragraph)  
-})
+  
+const validUserStyle = () => 
+  paragraph.setAttribute('class', 'username-success-feedback')
 
-form.username.addEventListener('keyup', event => {
-  console.log(event.value)
-})
-
+const userValidityCallBack = boolean => isValid = boolean
 
 
 /*
@@ -61,13 +71,38 @@ form.username.addEventListener('keyup', event => {
   - Não insira o parágrafo manualmente no index.html.
 */
 
+form.addEventListener('submit', event => {
+  event.preventDefault()
+  
+  if (isValid){
+    submitMessage(`Dados enviados =)`)
+    successSubmitStyle()
+    return
+  }
+  submitMessage('Por favor, insira um username válido')
+  failSubmitStyle()
+})
+
+const submitMessage = message => {
+  submitFeedBack.textContent = message
+  form.insertAdjacentElement('beforeend', submitFeedBack)
+}
+const failSubmitStyle = () => 
+  submitFeedBack.setAttribute('class', 'submit-help-feedback')
+const successSubmitStyle = () => 
+  submitFeedBack.setAttribute('class', 'submit-success-feedback')
+
+
 /*
   03
 
   - Há algumas aulas, falamos sobre o método some;
+
   - Neste exercício, seu desafio será criar este método do zero;
-  - Implemente uma função "some" que possui a mesma funcionalidade do método  
+
+  - Implemente uma função "some" que possui a mesma funcionalidade do método
     some original;
+
   - A assinatura da invocação desta função deverá ser:
     - some([1, 2, 3], item => item > 2) - Retorna true;
     - some([1, 3, 5], item => item === 0) - Retorna false;
@@ -78,3 +113,10 @@ form.username.addEventListener('keyup', event => {
         6;
     2) Pesquisar no MDN.
 */
+const array = [1,2,3]
+const array2 = [1,3,5]
+
+const hasTwo = item => item > 2
+const hasZero = item => item === 0
+console.log(array.some(hasTwo))
+console.log(array2.some(hasZero))
