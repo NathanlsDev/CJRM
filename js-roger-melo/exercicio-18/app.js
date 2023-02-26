@@ -18,46 +18,82 @@
   - Não insira o parágrafo manualmente no index.html.  
   Dica: pesquise pelo método "insertAdjacentElement", no MDN;
 */
-
 const inputInterface = document.querySelector('#username')
-const paragraph = document.createElement('p')
-let isValid = false
 const form = document.querySelector('form')
+const button = document.querySelector('button')
+
+const paragraph = document.createElement('p')
 const submitFeedBack = document.createElement('p')
+let isAValidUser = false
 
-inputInterface.addEventListener('keyup', ({ target }) => {
-  const userName = target.value
-  userValidation(userName)
-})
+const invalidUserNameInfo = {
+  paragraph: paragraph,
+  text: 'O valor deve conter no mínimo 6 caracteres, com apenas letras maiúsculas e/ou minúsculas',
+  className: 'username-help-feedback',
+  previousSibling: inputInterface,
+}
+const validUserNameInfo = {
+  paragraph: paragraph,
+  text: 'Username válido =)',
+  className: 'username-success-feedback',
+  previousSibling: inputInterface,
+}
 
-const userValidation = userName => {
-  const regexUserName = /^[a-zA-Z]{6,}(?: [a-zA-Z]+)*$/
-  const isAValidUserName = regexUserName.test(userName)
+const invalidSubmitInfo = {
+  paragraph: submitFeedBack,
+  text: 'Por favor, insira um username válido',
+  className: 'submit-help-feedback',
+  previousSibling: button,
+}
+const validSubmitInfo = {
+  paragraph: submitFeedBack,
+  text: 'Dados enviados =)',
+  className: 'submit-success-feedback',
+  previousSibling: button,
+}
+
+const showUserNameInfo = event => {
+  userValidation(event.target.value)  
+  removeSubmitParagraph()
+}
+
+const userValidation = userName => { 
+  const isAValidUserName = /^[a-zA-Z]{6,}(?: [a-zA-Z]+)*$/.test(userName)
 
   if (!isAValidUserName){
-    logMessage('O valor deve conter no mínimo 6 caracteres, com apenas letras maiúsculas e/ou minúsculas')
-    invalidUserStyle()
+    insertParagraphIntoDOM(invalidUserNameInfo)
     userValidityCallBack(false)
     return    
   }
-  logMessage ('Username válido =)')
-  validUserStyle()
+  insertParagraphIntoDOM(validUserNameInfo)
   userValidityCallBack(true)
 }
+const userValidityCallBack = boolean => isAValidUser = boolean
 
-const logMessage = message => {
-  paragraph.textContent = message
-  inputInterface.insertAdjacentElement('afterend', paragraph)
+const removeSubmitParagraph = () => {
+  submitFeedBack.setAttribute('data-feedback', 'submit-feedback')
+  if (submitFeedBack){
+    submitFeedBack.remove()
+  }
 }
 
-const invalidUserStyle = () => 
-  paragraph.setAttribute('class', 'username-help-feedback')
-  
-const validUserStyle = () => 
-  paragraph.setAttribute('class', 'username-success-feedback')
+const insertParagraphIntoDOM = paragraphInfo => {
+  const { paragraph, text, className, previousSibling } = paragraphInfo
+  paragraph.textContent = text
+  paragraph.setAttribute('class', className)
+  previousSibling.insertAdjacentElement('afterend', paragraph)
+}
 
-const userValidityCallBack = boolean => isValid = boolean
+const showSubmitInfo = event => {
+  event.preventDefault()
+  if (isAValidUser){
+    return insertParagraphIntoDOM(validSubmitInfo)
+  }
+  insertParagraphIntoDOM(invalidSubmitInfo)
+}
 
+inputInterface.addEventListener('input', showUserNameInfo)
+form.addEventListener('submit', showSubmitInfo)
 
 /*
   02
@@ -70,27 +106,6 @@ const userValidityCallBack = boolean => isValid = boolean
   - Use as classes disponíveis no arquivo style.css para colorir o parágrafo;
   - Não insira o parágrafo manualmente no index.html.
 */
-
-form.addEventListener('submit', event => {
-  event.preventDefault()
-  
-  if (isValid){
-    submitMessage(`Dados enviados =)`)
-    successSubmitStyle()
-    return
-  }
-  submitMessage('Por favor, insira um username válido')
-  failSubmitStyle()
-})
-
-const submitMessage = message => {
-  submitFeedBack.textContent = message
-  form.insertAdjacentElement('beforeend', submitFeedBack)
-}
-const failSubmitStyle = () => 
-  submitFeedBack.setAttribute('class', 'submit-help-feedback')
-const successSubmitStyle = () => 
-  submitFeedBack.setAttribute('class', 'submit-success-feedback')
 
 
 /*
@@ -113,10 +128,15 @@ const successSubmitStyle = () =>
         6;
     2) Pesquisar no MDN.
 */
-const array = [1,2,3]
-const array2 = [1,3,5]
 
-const hasTwo = item => item > 2
-const hasZero = item => item === 0
-console.log(array.some(hasTwo))
-console.log(array2.some(hasZero))
+const some = (array, func) => {
+  for (let i = 0; i < array.length; i++){
+    // console.log(array[i])
+    if (func(array[i])){
+      return true
+    }
+  }
+  return false
+}
+console.log(some([1,2,3], item => item === 2))
+console.log(some([4,5,6], item => item === 3))
