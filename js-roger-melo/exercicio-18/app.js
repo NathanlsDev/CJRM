@@ -27,13 +27,13 @@ const submitFeedBack = document.createElement('p')
 let isAValidUser = false
 
 const invalidUserNameInfo = {
-  paragraph: paragraph,
+  paragraph,
   text: 'O valor deve conter no mínimo 6 caracteres, com apenas letras maiúsculas e/ou minúsculas',
   className: 'username-help-feedback',
   previousSibling: inputInterface,
 }
 const validUserNameInfo = {
-  paragraph: paragraph,
+  paragraph,
   text: 'Username válido =)',
   className: 'username-success-feedback',
   previousSibling: inputInterface,
