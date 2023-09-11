@@ -1,12 +1,26 @@
 const form = document.querySelector(".quiz-form");
 const finalResult = document.querySelector(".result");
 
+let score = 0;
+let counter = 0;
 const correctAnswers = ["B", "B", "B", "B"];
 
-form.addEventListener("submit", (event) => {
+const enableScore = () => {
+  scrollTo(0, 0);
+  finalResult.classList.remove("d-none");
+};
+
+const showScore = () => {
+  const timer = setInterval(() => {
+    if (counter === score) clearInterval(timer);
+    finalResult.querySelector("span").textContent = `${counter}%`;
+    counter++;
+  }, 10);
+};
+
+const answerMatch = (event) => {
   event.preventDefault();
 
-  let score = 0;
   const userAnswers = [
     form.inputQuestion1.value,
     form.inputQuestion2.value,
@@ -20,19 +34,8 @@ form.addEventListener("submit", (event) => {
     }
   });
 
-  scrollTo(0, 0)
+  enableScore();
+  showScore();
+};
 
-  
-  finalResult.classList.remove("d-none");
-  
-  let counter = 0
-
-  const timer = setInterval(() => {
-    if(counter === score){
-      clearInterval(timer)
-    } 
-    finalResult.querySelector("span").textContent = `${counter}%`;
-    counter++
-  }, 10)
-});
-
+form.addEventListener("submit", answerMatch);
