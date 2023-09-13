@@ -8,8 +8,6 @@ const getUserAnswers = () =>
   correctAnswers.map((_, index) => form[`inputQuestion${index + 1}`].value);
 
 const calculateUserScore = (userAnswers) => {
-  score = 0;
-
   userAnswers.forEach((userAnswer, index) => {
     const userAnswerIsCorrect = userAnswer === correctAnswers[index];
 
@@ -31,11 +29,16 @@ const animateFinalScore = () => {
   }, 10);
 };
 
+const resetScore = () => {
+  score = 0;
+};
+
 const answerMatch = (event) => {
   event.preventDefault();
 
   const userAnswers = getUserAnswers();
 
+  resetScore();
   calculateUserScore(userAnswers);
   enableScore();
   animateFinalScore();
