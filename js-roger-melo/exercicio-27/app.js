@@ -63,8 +63,8 @@ console.log(`Preço total: ${totalPrice}`);
 */
 
 let car = { color: "amarelo" };
-let secondCar = car
-secondCar.color = 'azul'
+let secondCar = car;
+secondCar.color = "azul";
 console.log(car);
 
 /*
@@ -78,12 +78,13 @@ console.log(car);
 */
 
 const myFunc = (param1, param2, param3) => {
-  if([param1, param2, param3].includes(undefined)){
-    return `A função deve ser invocada com 3 argumentos.`
-  }
-  return `A função foi invocada com 3 argumentos.`
-}
-console.log(myFunc())
+  const isSomeParameterUndefined = [param1, param2, param3].includes(undefined);
+
+  return isSomeParameterUndefined
+    ? `A função deve ser invocada com 3 argumentos.`
+    : `A função foi invocada com 3 argumentos.`;
+};
+console.log(myFunc("batata", "paçoca"));
 
 /*
   07
@@ -111,3 +112,42 @@ let booksBox = {
   spaces: 5,
   booksIn: 0,
 };
+
+const getPluralOrSingular = (quantity, singular, plural) =>
+  quantity === 1 ? singular : plural;
+
+const getAvailableSpacesMessage = (spaces, booksIn) => {
+  const availableSpaces = spaces - booksIn;
+  
+  const fitPluralOrSingular = 
+    getPluralOrSingular(availableSpaces, "cabe", "cabem");
+
+  const bookPluralOrSingular = 
+    getPluralOrSingular(availableSpaces, "livro", "livros");
+
+  return `Só ${fitPluralOrSingular} mais ${availableSpaces} ${bookPluralOrSingular}`;
+};
+
+booksBox.addBooks = (booksQuantity) => {
+  const { spaces } = booksBox;
+
+  const isBoxFilled = booksBox.booksIn === spaces;
+  const bookBoxWithoutSpace = booksBox.booksIn + booksQuantity > spaces;
+
+  if (isBoxFilled) return `A caixa já está cheia`;
+  
+  if (bookBoxWithoutSpace)
+    return getAvailableSpacesMessage(spaces, booksBox.booksIn);
+
+  booksBox.booksIn += booksQuantity;
+
+  const bookPluralOrSingular = getPluralOrSingular(
+    booksBox.booksIn,
+    "livro",
+    "livros"
+  );
+  return `Já há ${booksBox.booksIn} ${bookPluralOrSingular} na caixa`;
+};
+
+console.log(booksBox.addBooks(5));
+console.log(booksBox.addBooks(3));
