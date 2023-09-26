@@ -1,10 +1,11 @@
 const request = new XMLHttpRequest();
 
-request.addEventListener("readystatechange", (event) => {
-  if (request.readyState === 4) console.log(request.responseText);
+request.addEventListener("readystatechange", () => {
+  if (request.readyState === 4 && request.status === 200)
+    console.log(request, request.responseText);
 });
 
-request.open("GET", "https://jsonplaceholder.typicode.com/todos");
+request.open("GET", "https://jsonplaceholder.typicode.com/todoss");
 request.send();
 
 // console.log(request)
