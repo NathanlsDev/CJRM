@@ -16,6 +16,21 @@
   - Teste também a verificação do item acima.
 */
 
+const request = new XMLHttpRequest();
+
+request.addEventListener("readystatechange", () => {
+  if (request.readyState === 4 && request.status === 200){
+    console.log(request.responseText);
+  }
+
+  if(request.readyState === 4 ) {
+    console.log(`Não foi possível obter os dados do pokémon`)
+  }
+});
+
+request.open("GET", "https://pokeapi.co/api/v2/pokemon/pikachu");
+request.send();
+
 /*
   02
 
@@ -31,15 +46,30 @@
     - Quantos metros você caminhou (number iniciado em 0).
 */
 
+let person = {
+  name: "Derp",
+  lastName: "Derpson",
+  gender: "M",
+  age: 25,
+  height: 1.8,
+  weight: 85,
+  isWalking: false,
+  walkDistance: 0
+}
+
+
 /*
   03
-
+  
   - Logo abaixo, adicione ao objeto um método que adiciona 1 ao valor da 
-    propriedade que armazena a idade;
+  propriedade que armazena a idade;
   - A cada vez que o método é invocado, 1 deve ser somado à idade atual;
   - Após criar o método, adicione 5 anos à idade do objeto.
-*/
+  */
 
+  console.log(person)
+
+  
 /*
   04
 
