@@ -1,15 +1,24 @@
-const request = new XMLHttpRequest();
+const getTodos = (callback) => {
+  const request = new XMLHttpRequest();
 
-request.addEventListener("readystatechange", () => {
-  if (request.readyState === 4 && request.status === 200)
-    console.log(request, request.responseText);
+  request.addEventListener("readystatechange", () => {
+    const isRequestOk = request.readyState === 4 && request.status === 200;
+    const isRequestNotOk = request.readyState === 4;
+
+    if (isRequestOk) {
+      return callback(null, request.responseText);
+    }
+
+    if (isRequestNotOk) {
+      callback("Não foi possível obter os dados", null);
+    }
+  });
+
+  request.open("GET", "https://jsonplaceholder.typicode.com/todos");
+  request.send();
+};
+
+getTodos((error, data) => {
+  const result = error || data;
+  console.log(result);
 });
-
-request.open("GET", "https://jsonplaceholder.typicode.com/todoss");
-request.send();
-
-// console.log(request)
-
-// fetch('https://jsonplaceholder.typicode.com/todos/1')
-//       .then(response => response.json())
-//       .then(json => console.log(json))
