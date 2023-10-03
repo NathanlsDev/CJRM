@@ -6,7 +6,8 @@ const getTodos = (callback) => {
     const isRequestNotOk = request.readyState === 4;
 
     if (isRequestOk) {
-      return callback(null, request.responseText);
+      const data = JSON.parse(request.responseText)
+      return callback(null, data);
     }
 
     if (isRequestNotOk) {
@@ -14,7 +15,7 @@ const getTodos = (callback) => {
     }
   });
 
-  request.open("GET", "https://jsonplaceholder.typicode.com/todos");
+  request.open("GET", "./todos.json");
   request.send();
 };
 
