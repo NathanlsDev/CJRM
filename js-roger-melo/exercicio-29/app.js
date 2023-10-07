@@ -14,35 +14,44 @@
 */
 
 const getPokemon = (url, callback) => {
-  const request = new XMLHttpRequest()
+  const request = new XMLHttpRequest();
 
-  request.addEventListener('readystatechange', () => {
-    if (request.readyState === 4 && request.status === 200){
-      const data = JSON.parse(request.responseText)
-      return callback(null, data)
+  request.addEventListener("readystatechange", () => {
+    const isRequestOk = request.readyState === 4 && request.status === 200;
+    const isRequestNotOk = request.readyState === 4;
+
+    if (isRequestOk) {
+      const data = JSON.parse(request.responseText);
+      return callback(null, data);
     }
 
-    if (request.readyState === 4){
-      callback(`Não foi possível obter o Pokémon`, null)
+    if (isRequestNotOk) {
+      callback(`Não foi possível obter o Pokémon`, null);
     }
-  })
+  });
 
-  request.open('GET', url)
-  request.send()
+  request.open("GET", url);
+  request.send();
+};
 
-}
+const logPokemonData = (error, data) =>
+  error ? console.log(error) : console.log(`Pokémon obtido: ${data.name}`);
 
-getPokemon("https://pokeapi.co/api/v2/pokemon/1", (error, data) => {
-  if(error){
-    return console.log(error)
-  }
-  console.log(`Pokémon obtido: ${data.name}`)
+const getPokemonUrl = (id) => `https://pokeapi.co/api/v2/pokemon/${id}`;
 
-  getPokemon("https://pokeapi.co/api/v2/pokemon/4", (error, data) => {
-    
-  })
-})
+const bulbasaur = getPokemonUrl(1);
+const chrmander = getPokemonUrl(4);
+const squirtle = getPokemonUrl(7);
 
+getPokemon(bulbasaur, (error, data) => {
+  logPokemonData(error, data);
+
+  getPokemon(chrmander, (error, data) => {
+    logPokemonData(error, data);
+
+    getPokemon(squirtle, logPokemonData);
+  });
+});
 
 /*
   02
@@ -63,6 +72,12 @@ getPokemon("https://pokeapi.co/api/v2/pokemon/1", (error, data) => {
     2) Pesquisar no MDN.
 */
 
+
+
+
+
+
+
 /*
   03
 
@@ -71,9 +86,9 @@ getPokemon("https://pokeapi.co/api/v2/pokemon/1", (error, data) => {
 */
 
 const person = {
-  name: 'Roger',
-  getName: () => this.name
-}
+  name: "Roger",
+  getName: () => this.name,
+};
 
 // console.log(person.getName())
 
@@ -86,7 +101,7 @@ const person = {
     delas.
 */
 
-const x = 'x'
+const x = "x";
 // const x = 'y'
 
 /*
@@ -97,13 +112,13 @@ const x = 'x'
 */
 
 const getFullName = (user) => {
-  const firstName = user.firstName
-  const lastName = user.lastName
+  const firstName = user.firstName;
+  const lastName = user.lastName;
 
-  return `${firstName} ${lastName}`
-}
+  return `${firstName} ${lastName}`;
+};
 
-console.log(getFullName({ firstName: 'Afonso', lastName: 'Solano' }))
+console.log(getFullName({ firstName: "Afonso", lastName: "Solano" }));
 
 /*
   06
@@ -118,7 +133,6 @@ console.log(getFullName({ firstName: 'Afonso', lastName: 'Solano' }))
     a mensagem 'Não temos o equivalente hexadecimal para COR';
   - Exiba o hexadecimal de 8 cores diferentes usando a função criada acima.
 */
-
 
 /*
   07
@@ -136,10 +150,10 @@ console.log(getFullName({ firstName: 'Afonso', lastName: 'Solano' }))
 */
 
 const people = [
-  { id: 5 , name: 'Angelica', age: 18, federativeUnit: 'Pernambuco' },
-  { id: 81, name: 'Thales', age: 19, federativeUnit: 'São Paulo' },
-  { id: 47, name: 'Ana Carolina', age: 18, federativeUnit: 'Alagoas' },
-  { id: 87, name: 'Felipe', age: 18, federativeUnit: 'Minas Gerais' },
-  { id: 9 , name: 'Gabriel', age: 20, federativeUnit: 'São Paulo' },
-  { id: 73, name: 'Aline', age: 19, federativeUnit: 'Brasília' }
-]
+  { id: 5, name: "Angelica", age: 18, federativeUnit: "Pernambuco" },
+  { id: 81, name: "Thales", age: 19, federativeUnit: "São Paulo" },
+  { id: 47, name: "Ana Carolina", age: 18, federativeUnit: "Alagoas" },
+  { id: 87, name: "Felipe", age: 18, federativeUnit: "Minas Gerais" },
+  { id: 9, name: "Gabriel", age: 20, federativeUnit: "São Paulo" },
+  { id: 73, name: "Aline", age: 19, federativeUnit: "Brasília" },
+];
