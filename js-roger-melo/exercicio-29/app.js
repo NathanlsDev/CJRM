@@ -72,11 +72,19 @@ getPokemon(bulbasaur, (error, data) => {
     2) Pesquisar no MDN.
 */
 
+const map = (array, func) => {
+  let newArray = [];
 
+  const duplicateValues = (number) => {
+    const newItem = func(number);
+    newArray.push(newItem);
+  };
+  array.forEach(duplicateValues);
 
+  return newArray;
+};
 
-
-
+console.log(map([1, 2, 3], (number) => number * 2));
 
 /*
   03
@@ -87,10 +95,10 @@ getPokemon(bulbasaur, (error, data) => {
 
 const person = {
   name: "Roger",
-  getName: () => this.name,
+  getName: () => person.name,
 };
 
-// console.log(person.getName())
+console.log(person.getName());
 
 /*
   04
@@ -101,8 +109,14 @@ const person = {
     delas.
 */
 
-const x = "x";
-// const x = 'y'
+const xScope = () => {
+  const x = "x";
+  return x;
+};
+
+const x = "y";
+
+console.log(x, xScope());
 
 /*
   05
@@ -111,13 +125,7 @@ const x = "x";
     conseguir.
 */
 
-const getFullName = (user) => {
-  const firstName = user.firstName;
-  const lastName = user.lastName;
-
-  return `${firstName} ${lastName}`;
-};
-
+const getFullName = ({ firstName, lastName }) => `${firstName} ${lastName}`;
 console.log(getFullName({ firstName: "Afonso", lastName: "Solano" }));
 
 /*
@@ -133,6 +141,34 @@ console.log(getFullName({ firstName: "Afonso", lastName: "Solano" }));
     a mensagem 'Não temos o equivalente hexadecimal para COR';
   - Exiba o hexadecimal de 8 cores diferentes usando a função criada acima.
 */
+
+const colors = [
+  "red",
+  "green",
+  "blue",
+  "yellow",
+  "purple",
+  "black",
+  "pink",
+  "orange",
+];
+
+const convertToHex = color => {
+  const colors = {
+    red: "#a31d19",
+    green: "#10a337",
+    blue: "#4c91f0",
+    yellow: "#f0ea6f",
+    purple: "#8132a3",
+  };
+
+  return colors[color]
+    ? `O hexadecimal para a cor: "${color}" é ${colors[color]}`
+    : `Não temos o equivalente hexadecimal para ${color}`;
+};
+
+const showHexColor = color => console.log(convertToHex(color));
+colors.forEach(showHexColor);
 
 /*
   07
@@ -157,3 +193,11 @@ const people = [
   { id: 9, name: "Gabriel", age: 20, federativeUnit: "São Paulo" },
   { id: 73, name: "Aline", age: 19, federativeUnit: "Brasília" },
 ];
+
+const createOrIncrementAgeFrequency = (acc, { age }) => {
+  acc[age] = acc[age] + 1 || 1;
+  return acc;
+};
+
+const agesFrequency = people.reduce(createOrIncrementAgeFrequency, {});
+console.log(agesFrequency);
