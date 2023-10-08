@@ -1,4 +1,4 @@
-const getTodos = url =>
+const getPokemon = (url) =>
   new Promise((resolve, reject) => {
     const request = new XMLHttpRequest();
 
@@ -20,6 +20,14 @@ const getTodos = url =>
     request.send();
   });
 
-getTodos("https://pokeapi.co/api/v2/pokemon/1")
-  .then(pokemon => console.log(pokemon))
-  .catch(error => console.log(error));
+getPokemon("https://pokeapi.co/api/v2/pokemon/1")
+  .then((bulbasaur) => {
+    console.log(bulbasaur);
+    return getPokemon("https://pokeapi.co/api/v2/pokemon/4");
+  })
+  .then((charmander) => {
+    console.log(charmander);
+    return getPokemon("https://pokeapi.co/api/v2/pokemon/7");
+  })
+  .then(console.log)
+  .catch((error) => console.log(error));
