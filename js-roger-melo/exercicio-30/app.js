@@ -8,7 +8,7 @@
     dados dos usuários."
 */
 
-const getUsers = (url) =>
+const getUsers = url =>
   new Promise((resolve, rejected) => {
     const request = new XMLHttpRequest();
 
@@ -22,7 +22,7 @@ const getUsers = (url) =>
       }
 
       if (isRequestNotOk) {
-        rejected("Não foi possível obter os dados dos usuários.")
+        rejected("Não foi possível obter os dados dos usuários.");
       }
     });
 
@@ -32,7 +32,7 @@ const getUsers = (url) =>
 
 getUsers("https://jsonplaceholder.typicode.com/users")
   .then(console.log)
-  .catch(console.log)
+  .catch(console.log);
 
 /*
   02
@@ -48,10 +48,24 @@ getUsers("https://jsonplaceholder.typicode.com/users")
   - Se o operador não for válido, retorne a mensagem "Operação inválida."
 */
 
+const getOperationMessage = (num1, operator, num2, operation) =>
+  `Resultado da operação: ${num1} ${operator} ${num2} = ${operation}.`;
+
+const calculator = operator => (num1, num2) =>
+  ({
+    "+": getOperationMessage(num1, operator, num2, num1 + num2),
+    "-": getOperationMessage(num1, operator, num2, num1 - num2),
+    "*": getOperationMessage(num1, operator, num2, num1 * num2),
+    "/": getOperationMessage(num1, operator, num2, num1 / num2),
+    "%": getOperationMessage(num1, operator, num2, num1 % num2),
+  }[operator] || "Operação inválida.");
+
+const operation = calculator("*");
+console.log(operation(10, 5));
 /*
   03
 
-  - Crie 2 arrays, `sul` e `sudeste`, que serão as regiões do Brasil. Cada 
+  - Crie 2 arrays,  `sul` e `sudeste`, que serão as regiões do Brasil. Cada 
     array deve conter os estados dessa região;
   - Crie uma const chamada `brasil`, que irá receber as duas regiões 
     concatenadas. Mostre o `brasil` no console;
@@ -61,6 +75,23 @@ getUsers("https://jsonplaceholder.typicode.com/users")
   - Crie um novo array chamado `newSul`, que recebe somente os estados do sul,
     pegando do array `brasil`. Não remova esses itens de `brasil`.
 */
+
+const sul = ["Santa Catarina", "Paraná", "Rio Grande do Sul"];
+const sudeste = [
+  "Minas Gerais",
+  "Espirito Santo",
+  "Rio de Janeiro",
+  "São Paulo",
+];
+
+let brasil = sul.concat(sudeste);
+brasil.unshift("Acre", "Amazonas", "Rondônia");
+
+console.log(brasil);
+console.log(brasil.shift());
+
+const newSul = brasil.slice(2, 5);
+console.log(newSul);
 
 /*
   04
@@ -81,6 +112,34 @@ getUsers("https://jsonplaceholder.typicode.com/users")
     every.
 */
 
+const nordeste = [
+  "Maranhão",
+  "Piauí",
+  "Ceará",
+  "Rio Grande do Norte",
+  "Paraíba",
+  "Bahia",
+  "Pernambuco",
+  "Alagoas",
+  "Sergipe",
+];
+
+const newSudeste = brasil.splice(5, 4);
+brasil = brasil.concat(nordeste);
+console.log(brasil);
+
+const newBrasil = brasil.map((item, index) => ({
+  id: index,
+  estado: `${item}`,
+}));
+console.log(newBrasil);
+
+const hasMoreThan7Letters = brasil.every(item => item.length > 7);
+const message = hasMoreThan7Letters
+  ? `Sim, todos os estados tem mais de 7 letras`
+  : `Nem todos os estados tem mais de 7 letras.".`;
+console.log(message);
+
 /*
   05
 
@@ -94,3 +153,18 @@ getUsers("https://jsonplaceholder.typicode.com/users")
   - Filtre o array criado acima, retornando somente os estados que tiverem ID 
     par. Atribua este novo array à uma constante.
 */
+
+const isCearaIncluded = brasil.includes("Ceará");
+const cearaMessage = isCearaIncluded
+  ? "Ceará está incluído"
+  : "Ceará não está incluído";
+console.log(cearaMessage);
+
+const reNewBrasil = newBrasil.map(({ id, estado }) => ({
+  id: id + 1,
+  estado: `${estado} pertence ao Brasil`,
+}));
+console.log(reNewBrasil);
+
+const filteredReNewBrasil = reNewBrasil.filter(({ id }) => id % 2 === 0);
+console.log(filteredReNewBrasil);
