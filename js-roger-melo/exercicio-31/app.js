@@ -8,6 +8,16 @@
     do GitHub.
 */
 
+const fetchGitHubUser = async username => {
+  const response = await fetch(`https://api.github.com/users/${username}`);
+  return response.json();
+};
+
+const logGitHubUser = async username =>
+  console.log(await fetchGitHubUser(username));
+
+logGitHubUser("nathanlsdev");
+
 /*
   02
 
@@ -16,7 +26,11 @@
   - Exiba esse novo array no console.
 */
 
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const divisibleBy2Or3 = numbers.filter(
+  number => number % 2 === 0 || number % 3 === 0
+);
+console.log(divisibleBy2Or3);
 
 /*
   03
@@ -31,6 +45,13 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     - Natália => "PNaPtáPlia";
     - Rafaela => "PRaPfaPePla".
 */
+
+const myName = ["Na", "than"];
+const nameInPLanguage = myName.reduce(
+  (acc, syllable) => `${acc}P${syllable}`,
+  ""
+);
+console.log(nameInPLanguage);
 
 /*
   04
@@ -47,6 +68,13 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   Dica: pesquise pelo método split.
 */
 
+const name = "Nathan";
+const splittedName = name
+  .split("")
+  .forEach((letter, index) =>
+    console.log(`${letter}" é a ${index + 1}ª letra do meu nome.`)
+  );
+
 /*
   05
 
@@ -59,6 +87,14 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
   Dica: pesquise pelo método Object.keys().
 */
+
+const person = {
+  name: "Ximira",
+  lastname: "Soares",
+  age: 50,
+};
+
+console.log(Object.keys(person));
 
 /*
   06
@@ -73,7 +109,12 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   - Utilize o array abaixo para testar a função.
 */
 
-const scores = [100, 90, 85, 100, 60, 85, 100, 90, 55, 75, 60]
+const scores = [100, 90, 85, 100, 60, 85, 100, 90, 55, 75, 60];
+
+const getOccurrences = (array, value) =>
+  array.reduce((acc, item) => (value === item ? acc + 1 : acc), 0);
+
+console.log(getOccurrences(scores, 100));
 
 /*
   07
@@ -98,3 +139,26 @@ const scores = [100, 90, 85, 100, 60, 85, 100, 90, 55, 75, 60]
   Dica: lembre-se que o método filter inclui o item em questão no novo array 
   que está sendo gerado **apenas** se a função retorna um valor truthy.
 */
+
+const filter = (array, func) => {
+  let newArray = [];
+
+  const filterItem = (item, index, array) => {
+    const itemShouldBeAdded = func(item, index, array);
+    if (itemShouldBeAdded) newArray.push(item);
+  };
+
+  array.forEach(filterItem);
+  return newArray;
+};
+
+console.log(filter([1, 2, 3], (item) => item));
+console.log(filter([0, 2, 3], (item) => item));
+console.log(filter([1, 2, 3], (item) => item < 2));
+console.log(filter([1, 2, 3, 5], (item, index) => item === index + 1));
+console.log(
+  filter(
+    [1, 2, 3, 2, 1, 5],
+    (item, index, array) => index === array.indexOf(item)
+  )
+);
