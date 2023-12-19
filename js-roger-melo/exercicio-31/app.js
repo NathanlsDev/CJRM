@@ -8,12 +8,12 @@
     do GitHub.
 */
 
-const fetchGitHubUser = async username => {
+const fetchGitHubUser = async (username) => {
   const response = await fetch(`https://api.github.com/users/${username}`);
   return response.json();
 };
 
-const logGitHubUser = async username =>
+const logGitHubUser = async (username) =>
   console.log(await fetchGitHubUser(username));
 
 logGitHubUser("nathanlsdev");
@@ -27,10 +27,9 @@ logGitHubUser("nathanlsdev");
 */
 
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const divisibleBy2Or3 = numbers.filter(
-  number => number % 2 === 0 || number % 3 === 0
-);
-console.log(divisibleBy2Or3);
+const getDivisibleBy2Or3 = (numbers) =>
+  numbers.filter((number) => number % 2 === 0 || number % 3 === 0);
+console.log(getDivisibleBy2Or3(numbers));
 
 /*
   03
@@ -47,11 +46,9 @@ console.log(divisibleBy2Or3);
 */
 
 const myName = ["Na", "than"];
-const nameInPLanguage = myName.reduce(
-  (acc, syllable) => `${acc}P${syllable}`,
-  ""
-);
-console.log(nameInPLanguage);
+const getNameInPLanguage = (name) =>
+  name.reduce((acc, syllable) => `${acc}P${syllable}`, "");
+console.log(getNameInPLanguage(myName));
 
 /*
   04
@@ -69,11 +66,12 @@ console.log(nameInPLanguage);
 */
 
 const name = "Nathan";
-const splittedName = name
+const logSplittedName = (name) => name
   .split("")
   .forEach((letter, index) =>
-    console.log(`${letter}" é a ${index + 1}ª letra do meu nome.`)
+    console.log(`"${letter}" é a ${index + 1}ª letra do meu nome.`)
   );
+logSplittedName(name);
 
 /*
   05
