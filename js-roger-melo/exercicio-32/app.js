@@ -21,35 +21,56 @@
   - Ignore os avisos no console. Para limpá-lo, pressione "ctrl + L".
 */
 
-const apiKey = null;//gere a sua chave da api, bruh!
+const form = document.querySelector("form");
+const outPut = document.querySelector("div");
 
-const form = document.querySelector("#form");
-const searchBar = document.querySelector("#search");
-const outPut = document.querySelector(".out");
+const apiKey = "gvW5pCkBNjiv5Y9AnWPW9iDLaGIhEZo0";
 
-const getUserInput = (e) => {
-  e.preventDefault();
-  const userInput = searchBar.value;
-  searchGif(userInput);
+const requestApi = userInput =>
+  `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&limit=1&q=${userInput}`;
+
+const getUserInput = event => {
+  event.preventDefault();
+
+  const userInput = event.target.search.value;
+  insertGIFIntoDOM(userInput);
+  
+  event.target.reset();
 };
 
-const searchGif = async (userInput) => {
+const fetchGIPHYApi = async userInput => {
   try {
-    const response = await fetch(
-      `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&limit=1&q=${userInput}`
-    );
-    const unWrapper = await response.json();
-    const gif = unWrapper.data[0].images.original.webp;
-    InsertIntoDom(gif);
+    const GIPHYApiUrl = requestApi(userInput);
+    const response = await fetch(GIPHYApiUrl);
+
+    if (!response.ok) {
+      throw new Error(`There's something wrong now, try again later`);
+    }
+    return response.json();
+
   } catch (error) {
-    throw new Error(`There's something wrong now, try again later`);
+    alert(`ERROR: ${error.message}`);
   }
 };
 
-const InsertIntoDom = (gif) => {
+const generateGIFImg = (gifImg, gifTitle) => {
   const imgElement = document.createElement("img");
-  imgElement.setAttribute("src", `${gif}`);
-  outPut.appendChild(imgElement);
+  imgElement.setAttribute("src", `${gifImg}`);
+  imgElement.setAttribute("alt", `${gifTitle}`);
+
+  return imgElement;
+};
+
+const insertGIFIntoDOM = async userInput => {
+  const GIFData = await fetchGIPHYApi(userInput);
+
+  if (GIFData) {
+    const gifImg = GIFData.data[0].images.downsized.url;
+    const gifTitle = GIFData.data[0].title;
+    const imgElement = generateGIFImg(gifImg, gifTitle);
+
+    outPut.insertAdjacentElement("afterbegin", imgElement);
+  }
 };
 
 form.addEventListener("submit", getUserInput);
