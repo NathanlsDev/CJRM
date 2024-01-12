@@ -24,7 +24,7 @@
 const form = document.querySelector("form");
 const outPut = document.querySelector("div");
 
-const apiKey = "gvW5pCkBNjiv5Y9AnWPW9iDLaGIhEZo0";
+const apiKey = "necessário criar sua própria chave 🔑 ↑";
 
 const requestApi = userInput =>
   `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&limit=1&q=${userInput}`;
