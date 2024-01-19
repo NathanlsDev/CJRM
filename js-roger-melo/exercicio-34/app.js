@@ -12,28 +12,32 @@
     versão deve fazer o mesmo que a função anterior faz, mas de forma diferente.
 */
 
+const revertString = (word) => {
+  const invertedString = [];
+
+  for (letter in word) {
+    invertedString.unshift(word[letter]);
+  }
+  return invertedString.join("");
+};
+console.log(revertString("Let him cook"));
+
+const reverseString = (word) => (reversed = [...word].reverse().join(""));
+console.log(reverseString("banana"));
 /*
   02
   
   - Descubra o que o código abaixo está fazendo e refatore-o.
 */
 
-const numbers = [5, 20, 7, 32, 47, 15, 83, 91, 27, 33]
-let foundNumber = false
+const numbers = [5, 20, 7, 32, 47, 15, 83, 91, 27, 33];
+let foundNumber = false;
 
-numbers.forEach(number => {
-  if (number === 15) {
-    foundNumber = true
-  }
-})
+// numbers.forEach((number) => {
+//   if (number === 15) {
+//     foundNumber = true;
+//   }
+// });
 
-console.log(foundNumber)
-
-/*
-  03
-
-  - Refatore o código da Weather Application implementado na última aula;
-  - Dicas do que pode ser refatorado:
-    - Substituir o if/else por um código mais elegante =D
-    - Isolar a manipulação do DOM em pequenas funções de responsabilidade única.
-*/
+numbers.includes(15) ? (foundNumber = true) : foundNumber;
+console.log(foundNumber);
