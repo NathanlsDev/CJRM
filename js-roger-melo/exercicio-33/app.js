@@ -5,7 +5,7 @@
   - Solucione esse problema sem declarar uma constante "book".
 */
 
-// console.log(book)
+console.log(book);
 
 /*
   02
@@ -17,6 +17,10 @@
   - Implemente a função da forma mais concisa que você conseguir.
 */
 
+const swap = ([first, , third]) => [third, first];
+
+console.log(swap(["10", "20", "30"]));
+
 /*
   03
 
@@ -25,10 +29,12 @@
 */
 
 const topics = [
-  { id: 1, name: 'Artes & cultura'},
-  { id: 2, name: 'Negócios & finanças'},
-  { id: 3, name: 'Carreiras'}
-]
+  { id: 1, name: "Artes & cultura" },
+  { id: 2, name: "Negócios & finanças" },
+  { id: 3, name: "Carreiras" },
+];
+
+const [, , { name }] = topics;
 
 /*
   04
@@ -38,7 +44,9 @@ const topics = [
     'red', 'green' e 'blue'.
 */
 
-const colors = ['#FF00FF', ['#FF0D0D', '#0AFA00', '#011EFA'], '#7BF0FF']
+const colors = ["#FF00FF", ["#FF0D0D", "#0AFA00", "#011EFA"], "#7BF0FF"];
+
+const [, [red, green, blue]] = colors;
 
 /*
   05
@@ -53,28 +61,9 @@ const colors = ['#FF00FF', ['#FF0D0D', '#0AFA00', '#011EFA'], '#7BF0FF']
     - Atribua "desconhecido" como valor default da const do destructuring;
     - Faça a função retornar "Olá, meu nome é [NOME]!".
 */
-
-// console.log(greet({ name: 'Roger' }, 'name'))
-// console.log(greet({}, 'personName'))
-
-/*
-  06
-
-  - O idioma da interface gráfica da aplicação que estamos construindo 
-    (Weather App) é pt-BR;
-  - Ao invocarmos a getCityWeather, observe que a propriedade "WeatherText" do 
-    objeto obtido armazena a descrição do clima em inglês: "cloudy", "rain", 
-    etc;
-  - Traduza os possíveis valores dessa propriedade;
-  - Não é necessário implementar condicionais, objetos, ou arrays para fazer
-    isso.
-*/
-
-/*
-  07
-
-  - Refatore o weather.js;
-  - Uma dica do que pode ser melhorado:
-    - A repetição dos requests pode ser eliminada por uma função genérica e 
-      reutilizável, responsável apenas por fazer requests.
-*/
+const greet = (obj, dynamicName) => {
+  const { [dynamicName]: name = 'unknown'} = obj;
+  return `Hello, my name is ${name}!`;
+};
+console.log(greet({ name: "Nathan" }, "name"));
+console.log(greet({}, 'personName'))
