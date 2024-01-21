@@ -31,7 +31,7 @@ console.log(reverseString("banana"));
 */
 
 const numbers = [5, 20, 7, 32, 47, 15, 83, 91, 27, 33];
-let foundNumber = false;
+const foundNumber = numbers.includes(15)
 
 // numbers.forEach((number) => {
 //   if (number === 15) {
@@ -39,5 +39,3 @@ let foundNumber = false;
 //   }
 // });
 
-numbers.includes(15) ? (foundNumber = true) : foundNumber;
-console.log(foundNumber);
