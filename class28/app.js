@@ -1,10 +1,25 @@
-localStorage.setItem("name", "nathan");
-localStorage.setItem("age", Infinity);
+const users = [
+  {
+    name: "nathanlsdev",
+    location: "c-137",
+    bio: "front-end developer",
+  },
+  {
+    name: "rod",
+    location: "PE",
+    bio: "something",
+  },
+  {
+    name: "Derp",
+    location: "SP",
+    bio: "Teacher",
+  },
+];
 
-const name = localStorage.getItem("name");
-const age = localStorage.getItem("age");
+localStorage.setItem("users", JSON.stringify(users));
 
-console.log(name, age);
+const storageData = localStorage.getItem("users");
+console.log(storageData);
 
-// localStorage.removeItem("name");
-// localStorage.clear()
+const convertData = JSON.parse(storageData);
+console.log(convertData);
