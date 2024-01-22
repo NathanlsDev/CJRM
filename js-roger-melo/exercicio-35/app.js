@@ -4,6 +4,29 @@
   - Implemente uma função que recebe o nome da key de um item da localStorage 
     e retorna o valor da key parseado para objeto javascript.
 */
+const students = [
+  {
+    name: "Nathan",
+    course: "front-end",
+  },
+  {
+    name: "Luke",
+    course: "back-end",
+  },
+  {
+    name: "Samantha",
+    course: "DBA",
+  },
+];
+const parseStudents = JSON.stringify(students);
+
+localStorage.setItem("students", parseStudents);
+
+const getObjectKey = (keyName) => {
+  const keyValue = localStorage.getItem(keyName);
+  return JSON.parse(keyValue);
+};
+console.log(getObjectKey("students"));
 
 /*
   02
@@ -18,11 +41,11 @@
   Dica: pesquise por valueAsNumber.
 */
 
-const input = document.querySelector('[data-js="input"]')
+const input = document.querySelector('[data-js="input"]');
 
-input.addEventListener('input', event => {
-  console.log(event.target.value)
-})
+input.addEventListener("input", (event) => {
+  console.log(event.target.valueAsNumber);
+});
 
 /*
   03
@@ -39,28 +62,17 @@ input.addEventListener('input', event => {
     retornar 60 e a segunda invocação, 10.
 */
 
-function add100 (num) {
-  return num + 100
-}
+const combineOperations = (initValue, arrOfFuncs) =>
+  arrOfFuncs.reduce((acc, func) => func(acc), initValue);
 
-function divByFive (num) {
-  return num / 5
-}
+const add100 = (num) => num + 100;
+const divByFive = (num) => num / 5;
+const multiplyByThree = (num) => num * 3;
+const multiplyFive = (num) => num * 5;
+const addTen = (num) => num + 10;
 
-function multiplyByThree (num) {
-  return num * 3
-}
-
-function multiplyFive (num) {
-  return num * 5
-}
-
-function addTen (num) {
-  return num + 10
-}
-
-// console.log(combineOperations(0, [add100, divByFive, multiplyByThree]))
-// console.log(combineOperations(0, [divByFive, multiplyFive, addTen]))
+console.log(combineOperations(0, [add100, divByFive, multiplyByThree]));
+console.log(combineOperations(0, [divByFive, multiplyFive, addTen]));
 
 /*
   04
@@ -72,37 +84,39 @@ function addTen (num) {
 const albums = [
   {
     id: 537,
-    title: 'The Dark Side of the Moon',
-    artist: 'Pink Floyd',
-    price: 59.90,
-    genre: 'Progressive Rock'
+    title: "The Dark Side of the Moon",
+    artist: "Pink Floyd",
+    price: 59.9,
+    genre: "Progressive Rock",
   },
   {
     id: 975,
-    title: 'Houses of the Holy',
-    artist: 'Led Zeppelin',
-    price: 81.00,
-    genre: 'Rock'
+    title: "Houses of the Holy",
+    artist: "Led Zeppelin",
+    price: 81.0,
+    genre: "Rock",
   },
   {
     id: 359,
-    title: 'Heaven and Hell',
-    artist: 'Black Sabbath',
-    price: 49.90,
-    genre: 'Heavy metal'
-  }
-]
+    title: "Heaven and Hell",
+    artist: "Black Sabbath",
+    price: 49.9,
+    genre: "Heavy metal",
+  },
+];
 
 const searchAlbum = {
   id: 975,
-  title: 'Houses of the Holy',
-  artist: 'Led Zeppelin',
-  price: 81.00,
-  genre: 'Rock'
-}
+  title: "Houses of the Holy",
+  artist: "Led Zeppelin",
+  price: 81.0,
+  genre: "Rock",
+};
 
-if (albums.includes(searchAlbum)) {
-  console.log(`${JSON.stringify(searchAlbum)} existe no array albums.`)
+const albumExistsInArray = albums.some((album) => album.id === searchAlbum.id);
+
+if (albumExistsInArray) {
+  console.log(`${JSON.stringify(searchAlbum)} existe no array albums.`);
 }
 
 /*
@@ -112,15 +126,30 @@ if (albums.includes(searchAlbum)) {
 */
 
 const obj = {
-  prop1: 'a',
-  prop2: 'b',
+  prop0: () => {},
+  prop1: "a",
+  prop2: "b",
   prop3: null,
   prop4: true,
   prop5: false,
   prop6: [9, { x: 1, y: 2 }],
   prop7: 7,
-  prop8: { a: 'x', b: 'y' },
-}
+  prop8: { a: "x", b: "y" },
+};
+
+const objCopy = {
+  ...obj,
+  prop6: [obj.prop6[0], { ...obj.prop6[1] }],
+  prop8: {
+    ...obj.prop8,
+  },
+};
+obj.prop1 = "x";
+
+obj.prop6[0] = "item modificado";
+obj.prop8 = "valor modificado";
+
+console.log(obj, objCopy);
 
 /*
   06
@@ -133,10 +162,22 @@ const obj = {
   Dica: pesquise por Object.entries.
 */
 
-/*
-  07
+const createElement = (elementName, attributes) => {
+  const element = document.createElement(elementName);
+  const attributesAsArray = Object.entries(attributes);
 
-  - Na weather app, faça com que quando o usuário recarregar a página ou sair 
-    da aplicação e voltar, as informações da última cidade pesquisada sejam 
-    exibidas na interface.
-*/
+  attributesAsArray.forEach(([key, value]) => element.setAttribute(key, value));
+
+  return element;
+};
+
+const inputFunc = createElement("input", {
+  type: "radio",
+  id: "input1",
+  name: "main",
+  value: "principal",
+  for: "input1",
+  "data-js": "input1",
+});
+
+console.log(inputFunc);
