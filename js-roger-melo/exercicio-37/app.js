@@ -6,19 +6,17 @@
 */
 
 class Animal {
-  constructor (name) {
-    this.name = name
+  constructor(name) {
+    this.name = name;
   }
 }
 
 class Rabbit extends Animal {
-  constructor (name) {
-    this.name = name
-    this.created = new Date()
-  }
+  created = new Date();
 }
 
-// let rabbit = new Rabbit('White Rabbit')
+let rabbit = new Rabbit("White Rabbit");
+console.log(rabbit);
 
 /*
   02
@@ -27,11 +25,28 @@ class Rabbit extends Animal {
     funcione.
 */
 
-// const counter = new Counter()
+class Counter {
+  #count = 0;
+  get value() {
+    return this.#count;
+  }
+  increment() {
+    return this.#count++;
+  }
+  set newValue(aNumber) {
+    this.#count = aNumber;
+  }
+}
 
-// counter.getValue()
-// counter.increment()
-// counter.getValue()
+const counter = new Counter();
+
+// counter.#count = 'oi'
+
+console.log(counter.value);
+counter.increment();
+counter.newValue = 7;
+console.log(counter.value);
+// console.log(counter.#count);
 
 /*
   03
@@ -41,14 +56,11 @@ class Rabbit extends Animal {
   - Não invoque o construtor.
 */
 
-const values = [
-  0,
-  {},
-  '',
-  [],
-  NaN,
-  () => {}
-]
+const values = [0, {}, "", [], NaN, () => {}];
+
+const truthyValues = values.filter(Boolean);
+
+console.log(truthyValues);
 
 /*
   04
@@ -60,64 +72,67 @@ const values = [
     funcione.
 */
 
-// class Clock {
-//   constructor ({ template }) {
-//     this.template = template
-//   }
+const formatTimeUnits = (units) =>
+  units.map((unit) => (unit < 10 ? `0${unit}` : unit));
 
-//   render () {
-//     const date = new Date()
-//     let hours = date.getHours()
-//     let minutes = date.getMonth()
-//     let seconds = date.getSeconds()
+const getTime = () => {
+  const date = new Date();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
 
-//     if (hours < 10) {
-//       hours = `0${hours}`
-//     }
+  return [hours, minutes, seconds];
+};
 
-//     if (minutes < 10) {
-//       minutes = `0${minutes}`
-//     }
+const getFormattedTime = (template) => {
+  const [hours, minutes, seconds] = getTime();
+  const formattedTime = formatTimeUnits([hours, minutes, seconds]);
 
-//     if (seconds < 10) {
-//       seconds = `0${seconds}`
-//     }
+  return template
+    .split(":")
+    .map((_, index) => formattedTime[index])
+    .join(":");
+};
 
-//     const formattedTime = this.template
-//       .replace('h', hours)
-//       .replace('m', minutes)
-//       .replace('s', seconds)
+class Clock {
+  constructor({ template }) {
+    this.template = template;
+  }
 
-//     console.log(formattedTime)
-//   }
+  render() {
+    const formattedTime = getFormattedTime(this.template);
+    // console.log(formattedTime);
+  }
 
-//   start () {
-//     this.render()
-//     this.timer = setInterval(() => this.render(), 1000)
-//   }
+  start() {
+    const oneSecond = 1000;
 
-//   stop () {
-//     clearInterval(this.timer)
-//   }
-// }
+    this.render();
+    this.timer = setInterval(() => this.render(), oneSecond);
+  }
 
-// class ExtendedClock extends Clock {
-//   constructor ({ options }) {
-//     super(options)
-    
-//     let { precision = 1000 } = options
-//     this.precision = precision
-//   }
+  stop() {
+    clearInterval(this.timer);
+  }
+}
 
-//   start () {
-//     this.render()
-//     this.timer = setInterval(() => this.render(), this.precision)
-//   }
-// }
+class ExtendedClock extends Clock {
+  constructor(options) {
+    super(options);
 
-// const clock = ExtendedClock({ template: 'h:m:s', precision: 1000 })
+    const { precision = 1000 } = options;
+    this.precision = precision;
+  }
 
-// clock.start()
+  start() {
+    this.render();
+    this.timer = setInterval(() => this.render(), this.precision);
+  }
+}
+
+const clock = new ExtendedClock({ template: "h:m:s", precision: 1000 });
+
+clock.start();
 
 /*
   05
@@ -126,8 +141,17 @@ const values = [
     caractere for inserido no textarea, exiba no parágrafo a quantidade de 
     caracteres que o textarea contém.
 */
+const textArea = document.querySelector('[data-js="textarea"]');
+const parag = document.querySelector('[data-js="paragraph"]');
 
+const showCounterParagraph = (e) => {
+  const curretLength = e.target.value.length;
+  const maxlength = e.target.getAttribute("maxlength");
 
+  parag.innerText = maxlength - curretLength + ` caracteres restantes...`;
+};
+
+textArea.addEventListener("input", showCounterParagraph);
 
 /*
   06
@@ -155,3 +179,28 @@ const values = [
     vídeo de correção dos exercícios um link para a aula de introdução ao 
     reduce e um link para a documentação do método no MDN.
 */
+
+const reduce = (arr, func, initialValue) => {
+  let acc = initialValue;
+
+  const accumulateCallbackReturn = (item, index, array) => {
+    acc = func(acc, item, index, array);
+  };
+
+  arr.forEach(accumulateCallbackReturn);
+  return acc;
+};
+
+const createItemsBasedProperties = (acc, item) => {
+  acc["number-" + item] = item;
+  return acc;
+};
+
+const sumItems = (acc, item) => acc + item;
+const sumItemsPlusIndex = (acc, item, index) => acc + index;
+const sumItemsUsingArrayParam = (acc, item, index, array) => acc + array[index];
+
+console.log(reduce([1, 2, 3], sumItems, 0));
+console.log(reduce([1, 2], createItemsBasedProperties, {}));
+console.log(reduce([1, 2], sumItemsPlusIndex, 0));
+console.log(reduce([1, 2], sumItemsUsingArrayParam, 0));
