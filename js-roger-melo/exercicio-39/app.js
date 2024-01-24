@@ -16,11 +16,11 @@
       array que contenha 2 números e com um outro que contenha 4 números.
 */
 
-const numbers = [50, 100, 50]
+const numbers = [50, 100, 50];
 
-const sum = (x, y, z) => x + y + z
+const sum = (...params) => params.reduce((acc, number) => acc + number, 0);
 
-console.log(sum(...numbers))
+console.log(sum(...numbers));
 
 /*
   02
@@ -35,8 +35,6 @@ console.log(sum(...numbers))
   - Para que o item do accordion seja "ativado" ao clicar, faça um toogle 
     utilizando a classe "active".
 */
-
-
 
 /*
   03
@@ -55,10 +53,10 @@ console.log(sum(...numbers))
 */
 
 const volkswagenProto = {
-  logCarInfo () {
-    console.log(`Volkswagen ${this.name}, cor ${this.color}.`)
-  }
-}
+  logCarInfo() {
+    console.log(`Volkswagen ${this.name}, cor ${this.color}.`);
+  },
+};
 
 // const amarok = carMaker({ name: 'Amarok', color: 'preta' })
 // const jetta = carMaker({ name: 'Jetta', color: 'prata' })
@@ -77,9 +75,8 @@ const volkswagenProto = {
     modificando o caractere que ela recebe como segundo argumento.
 */
 
-const aString = 'O Curso de JavaScript Roger Melo funciona com turmas fechadas, abertas poucas vezes e é focado em quem ainda não é fluente em JS. Ou seja, quem não consegue construir aplicações web com JavaScript puro.'
-
-
+const aString =
+  "O Curso de JavaScript Roger Melo funciona com turmas fechadas, abertas poucas vezes e é focado em quem ainda não é fluente em JS. Ou seja, quem não consegue construir aplicações web com JavaScript puro.";
 
 // console.log(getIndexesOfCharacter(aString, 'b'))
 
@@ -126,8 +123,6 @@ const aString = 'O Curso de JavaScript Roger Melo funciona com turmas fechadas, 
       ela já tem + 1 e faça characterIndex receber 0.
 */
 
-
-
 /*
   06
 
@@ -135,21 +130,19 @@ const aString = 'O Curso de JavaScript Roger Melo funciona com turmas fechadas, 
 */
 
 const wrongDataFormat = [
-  'preto-PP',
-  'preto-M',
-  'preto-G',
-  'preto-GG',
-  'preto-GG',
-  'branco-PP',
-  'branco-G',
-  'vermelho-M',
-  'azul-XG',
-  'azul-XG',
-  'azul-XG',
-  'azul-P'
-]
-
-
+  "preto-PP",
+  "preto-M",
+  "preto-G",
+  "preto-GG",
+  "preto-GG",
+  "branco-PP",
+  "branco-G",
+  "vermelho-M",
+  "azul-XG",
+  "azul-XG",
+  "azul-XG",
+  "azul-P",
+];
 
 /*
   {
